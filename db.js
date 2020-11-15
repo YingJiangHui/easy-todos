@@ -8,9 +8,9 @@ const write = (list) =>
   )
 
 
-const read = () => {
+const read = (path) => {
   return new Promise((resolve, reject) => {
-    fs.readFile(dbPath, {flag: 'a+'}, (error1, data) => {
+    fs.readFile(path||dbPath, {flag: 'a+'}, (error1, data) => {
       let list
       if (error1)
         return reject(error1)
