@@ -2,15 +2,15 @@ const USER_HOME = process.env.HOME || process.env.USERPROFILE
 const path = require('path')
 const dbPath = path.join(USER_HOME, '.todo')
 const fs = require('fs')
-const write = (list) =>
+const write = (list,path=dbPath) =>
   new Promise((resolve, reject) =>
-    fs.writeFile(dbPath, JSON.stringify(list), (error) => error && reject(error))
+    fs.writeFile(path, JSON.stringify(list), (error) => error ? reject(error) : resolve())
   )
 
 
-const read = (path) => {
+const read = (path=dbPath) => {
   return new Promise((resolve, reject) => {
-    fs.readFile(path||dbPath, {flag: 'a+'}, (error1, data) => {
+    fs.readFile(path, {flag: 'a+'}, (error1, data) => {
       let list
       if (error1)
         return reject(error1)
