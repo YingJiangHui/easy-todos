@@ -27,10 +27,10 @@ program
     api.clear()
   })
 program
-  .command('ls')
+  .command('show')
   .description('show all task')
   .action((...args)=>{
-    api.showAll()
+    api.show()
   })
 
 program.parse(process.argv);
