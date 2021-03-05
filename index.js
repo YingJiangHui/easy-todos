@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 const db = require('./db.js')
 const inquirer = require('inquirer')
+
 const add = async (title) => {
   //读取文件
   const list = await db.read()
@@ -8,7 +9,7 @@ const add = async (title) => {
   list.push({title, done: false})
   //写入文件
   await db.write(list)
-
+  
 }
 
 const clear = () => {
@@ -48,16 +49,14 @@ function updateTitle(list, index) {
   })
 }
 
-function remove(list, index) {
-  list.splice(index, 1)
-  db.write(list)
-}
-
 const x = {
   markAsDone,
   markAsUndone,
   updateTitle,
-  remove
+  remove(list, index) {
+    list.splice(index, 1)
+    db.write(list)
+  }
 }
 
 function askForAction(list, index) {
@@ -77,7 +76,7 @@ function askForAction(list, index) {
       },
     ]).then((answer2) => {
     const action = x[answer2.action]
-    action && action(list,index)
+    action && action(list, index)
   })
 }
 
@@ -107,7 +106,62 @@ const showAll = async () => {
     })
 }
 
+function removeOnce(list,key) {
+  const searchList = list.filter((item, index) => Number(index) === Number(key) || item.title.trim() === key.trim())
+  if(searchList.length===0){
+    console.log('找不到哎')
+    return;
+  }
+  const newList = list.filter((item, index) => Number(index) !== Number(key) && item.title.trim() !== key.trim())
+  inquirer
+    .prompt([
+      {
+        type: 'confirm',
+        name: 'choices',
+        message: (a) => {
+          return "确认是否删除 todo --> " + searchList.map(item => item.title).join(' | ')
+        },
+      },
+    ])
+    .then((answer) => {
+      answer.choices && db.write(newList)
+    })
+}
+function removeList(list) {
+  inquirer
+    .prompt([
+      {
+        type: 'checkbox',
+        name: 'select',
+        message: 'remove todo/todos ？',
+        choices: [...list.map((item, index) => {
+          return {
+            name: `${index+1}. ${item.title}`,
+            value: index.toString()
+          }
+        })],
+      },
+    ]).then((answer) => {
+    const newList = list.filter((item, index) => !answer.select.includes(index.toString()))
+    list.length !== newList && db.write(newList)
+  })
+}
 
-module.exports = {add, clear, showAll}
+const remove = async (key) => {
+  const list = await db.read()
+  if(list.length === 0){
+    console.log("not todo")
+    return;
+  }
+  
+  if (!key) {
+    removeList(list)
+    return;
+  }
+  
+  removeOnce(list,key)
+}
+
+module.exports = {add, remove, clear, showAll}
 
 

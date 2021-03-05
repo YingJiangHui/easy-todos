@@ -14,13 +14,20 @@ program
   })
 
 program
+  .command('remove')
+  .description('choose will remove todo')
+  .action((...args)=>{
+    // 匹配index text进行删除
+    api.remove(args[1]?args[1][0]:'')
+  })
+program
   .command('clear')
   .description('clear all tasks')
   .action((...args)=>{
     api.clear()
   })
 program
-  .command('showAll')
+  .command('ls')
   .description('show all task')
   .action((...args)=>{
     api.showAll()
