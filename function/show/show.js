@@ -1,5 +1,6 @@
 const inquirer = require('inquirer')
 const db = require("../../db");
+const colors = require('colors')
 
 function askForCreate(list, index) {
   inquirer.prompt({
@@ -52,13 +53,13 @@ function askForAction(list, index) {
       {
         type: 'list',
         name: 'action',
-        message: '请选择你想要的操作',
+        message: 'Select action',
         choices: [
-          {name: '退出', value: 'quit'},
-          {name: '完成', value: 'markAsDone'},
-          {name: '未完成', value: 'markAsUndone'},
-          {name: '修改标题', value: 'updateTitle'},
-          {name: '删除', value: 'remove'}
+          {name: 'Quit', value: 'quit'},
+          {name: 'Done', value: 'markAsDone'},
+          {name: 'Undo', value: 'markAsUndone'},
+          {name: 'Edit', value: 'updateTitle'},
+          {name: 'Del'.red, value: 'remove'}
         ],
       },
     ]).then((answer2) => {
@@ -75,12 +76,12 @@ const show = async () => {
         type: 'list',
         name: 'index',
         message: '请选择你想要的操作',
-        choices: [{name: '退出', value: '-1'}, ...list.map((item, index) => {
+        choices: [{name: 'Quit'.blue, value: '-1'}, ...list.map((item, index) => {
           return {
-            name: `${item.done ? '[x]' : '[_]'} ${index + 1} - ${item.title}`,
+            name: `${item.done?`${index + 1}.${item.title} ---------------------------> [ ✔ ]`.gray:`${index + 1}.${item.title} ---------------------------> [ ✘ ]`}`,
             value: index.toString()
           }
-        }), {name: '创建', value: '-2'}],
+        }), {name: 'Add'.green, value: '-2'}],
       },
     ])
     .then((answer) => {

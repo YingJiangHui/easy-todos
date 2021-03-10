@@ -18,14 +18,14 @@ function excludeCheckedList(list, indexList) {
 const remove = async (searchText) => {
   const list = await db.read()
   if(list.length === 0){
-    console.log("not todo")
+    console.log("No things to do ~")
     return;
   }
   
   if (searchText) {
     const {searchList,newList} = searchRemove(list,searchText)
     if(searchList.length===0){
-      console.log('找不到哎')
+      console.log('Not find to do ~')
       return;
     }
     inquirer
@@ -34,7 +34,7 @@ const remove = async (searchText) => {
           type: 'confirm',
           name: 'choices',
           message: (a) => {
-            return "确认是否删除 todo --> " + searchList.map(item => item.title).join(' | ')
+            return "confirm delete to do --> " + searchList.map(item => item.title).join(' | ')
           },
         },
       ])
