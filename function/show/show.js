@@ -1,16 +1,19 @@
 const inquirer = require('inquirer')
 const db = require("../../db");
 const colors = require('colors')
+const {add,priorityMap,priorityMapWithColor} = require('../add/add')
+const {priority} = require("../add/add")
 
 function askForCreate(list, index) {
-  inquirer.prompt({
-    type: 'input',
-    name: 'title',
-    message: '输入创建的标题名',
-  }).then((answers) => {
-    list.push({title: answers.title, done: false})
-    db.write(list)
-  })
+  add()
+  // inquirer.prompt({
+  //   type: 'input',
+  //   name: 'title',
+  //   message: '输入创建的标题名',
+  // }).then((answers) => {
+  //   list.push({title: answers.title, done: false})
+  //   db.write(list)
+  // })
 }
 
 function markAsDone(list, index) {
@@ -24,6 +27,8 @@ function markAsUndone(list, index) {
 }
 
 function updateTitle(list, index) {
+
+
   inquirer.prompt({
     type: 'input',
     name: 'title',
@@ -70,6 +75,11 @@ function askForAction(list, index) {
 
 const show = async () => {
   const list = await db.read()
+  function print({item,index}){
+    const info = `${index + 1}.${item.title}`
+    const arrow = " ---------------------------> "
+    return item.done?`${priorityMap[item.priority]} ${info  + arrow}[ ✔ ]`.gray:`${priorityMapWithColor[item.priority]} ${info + arrow}[ ✘ ]`
+  }
   inquirer
     .prompt([
       {
@@ -77,8 +87,9 @@ const show = async () => {
         name: 'index',
         message: '请选择你想要的操作',
         choices: [{name: 'Quit'.blue, value: '-1'}, ...list.map((item, index) => {
+          console.log(item.priority)
           return {
-            name: `${item.done?`${index + 1}.${item.title} ---------------------------> [ ✔ ]`.gray:`${index + 1}.${item.title} ---------------------------> [ ✘ ]`}`,
+            name: print({item,index}),
             value: index.toString()
           }
         }), {name: 'Add'.green, value: '-2'}],

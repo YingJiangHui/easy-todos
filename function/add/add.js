@@ -1,8 +1,22 @@
 const db = require("./../../db.js")
 const inquirer = require("inquirer")
-
+const colors = require("colors")
+const priorityMapWithColor = {
+  "low": "❗  ".blue,
+  "Medium": "❗❗ ".yellow,
+  "high": "❗❗❗".red,
+}
+const priorityMap = {
+  "low": "❗  ",
+  "Medium": "❗❗ ",
+  "high": "❗❗❗",
+}
 const add = async (title) => {
-  const todoInfo = title?{title,done:false}:await inquirer.prompt([{type: "input", name: "title", message: "To do title ?"}, {
+  const todoInfo = title ? {title, done: false} : await inquirer.prompt([{
+    type: "input",
+    name: "title",
+    message: "To do title ?"
+  }, {
     type: "input",
     name: "description",
     message: "To do description ?"
@@ -10,13 +24,13 @@ const add = async (title) => {
     type: "list", name: "priority", message: "To do priority ?", choices: [
       {name: "low    ❗".blue, value: "low"},
       {name: "Medium ❗❗".yellow, value: "Medium"},
-      {name: "high   ❗❗❗ ".red, value: "high"},
-    ],
-  },{
-    type: 'confirm',name: "done" ,message:"To do done ?"
+      {name: "high   ❗❗❗ ".red, value: "high"}
+    ]
+  }, {
+    type: "confirm", name: "done", message: "To do done ?"
   }])
-  if(!todoInfo)
-    return;
+  if (!todoInfo)
+    return
   //读取文件
   const list = await db.read()
   // //添加todo
@@ -25,4 +39,8 @@ const add = async (title) => {
   await db.write(list)
 }
 
-module.exports = add
+module.exports = {
+  priorityMapWithColor,
+  priorityMap,
+  add
+}
