@@ -11,15 +11,16 @@ const priorityMap = {
   "Medium": "❗❗ ",
   "high": "❗❗❗",
 }
-const add = async (title) => {
-  const todoInfo = title ? {title, done: false} : await inquirer.prompt([{
+
+const collectTodoInfo = async ()=>{
+  return inquirer.prompt([{
     type: "input",
     name: "title",
-    message: "To do title ?"
+    message: "To do title ?",
   }, {
     type: "input",
     name: "description",
-    message: "To do description ?"
+    message: "To do description ?",
   }, {
     type: "list", name: "priority", message: "To do priority ?", choices: [
       {name: "low    ❗".blue, value: "low"},
@@ -29,6 +30,11 @@ const add = async (title) => {
   }, {
     type: "confirm", name: "done", message: "To do done ?"
   }])
+}
+
+
+const add = async (title) => {
+  const todoInfo = title ? {title, done: false} : await collectTodoInfo()
   if (!todoInfo)
     return
   //读取文件

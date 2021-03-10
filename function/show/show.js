@@ -26,23 +26,23 @@ function markAsUndone(list, index) {
   db.write(list)
 }
 
-function updateTitle(list, index) {
-
-
-  inquirer.prompt({
-    type: 'input',
-    name: 'title',
-    message: '修改你的标题',
-    default: list[index].title
-  }).then((answers) => {
-    list[index].title = answers.title
-    db.write(list)
-  })
+async function updateTitle (list, index) {
+  const answer = await inquirer.prompt([{
+    type: "input",
+    name: "title",
+    message: "To do title ?",
+  }, {
+    type: "input",
+    name: "description",
+    message: "To do description ?",
+  }])
+  list[index] = {...list[index],...answer}
+  await db.write(list)
 }
 
-function remove(list, index) {
+async function remove(list, index) {
   list.splice(index, 1)
-  db.write(list)
+  await db.write(list)
 }
 
 const actionMap = {
