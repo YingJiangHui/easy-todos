@@ -1,9 +1,7 @@
 const inquirer = require('inquirer')
 const db = require("../../db");
-const colors = require('colors')
-const {add,priorityMap,priorityMapWithColor} = require('../add/add')
-const {priority} = require("../add/add")
-
+require('colors')
+const {add,priorityMap,priorityMapColor} = require('../add/add')
 function askForCreate(list, index) {
   add()
   // inquirer.prompt({
@@ -53,6 +51,12 @@ const actionMap = {
 }
 
 function askForAction(list, index) {
+  const todo = list[index]
+  const color = priorityMapColor[todo.priority]
+  const gapLine = "---------------------------------------------------------------------------------->"[color]
+  console.log(gapLine)
+  console.log(`Title: ${todo.title}    ${todo.done?"(: ✔ ←".blue:"(: ✘ ←".blue} ${priorityMap[todo.priority][color]} \nDescription: ${todo.description}`)
+  console.log(gapLine)
   inquirer
     .prompt([
       {
@@ -69,7 +73,7 @@ function askForAction(list, index) {
       },
     ]).then((answer2) => {
     const action = actionMap[answer2.action]
-    action && action(list, index)
+    action?.(list, index)
   })
 }
 
@@ -78,7 +82,7 @@ const show = async () => {
   function print({item,index}){
     const info = `${index + 1}.${item.title}`
     const arrow = " ---------------------------> "
-    return item.done?`${priorityMap[item.priority]} ${info  + arrow}[ ✔ ]`.gray:`${priorityMapWithColor[item.priority]} ${info + arrow}[ ✘ ]`
+    return item.done?`${priorityMap[item.priority]} ${info  + arrow}[ ✔ ]`.gray:`${priorityMap[item.priority][priorityMapColor[item.priority]]} ${info + arrow}[ ✘ ]`
   }
   inquirer
     .prompt([

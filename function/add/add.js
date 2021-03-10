@@ -1,26 +1,26 @@
 const db = require("./../../db.js")
 const inquirer = require("inquirer")
 const colors = require("colors")
-const priorityMapWithColor = {
-  "low": "❗  ".blue,
-  "Medium": "❗❗ ".yellow,
-  "high": "❗❗❗".red,
+const priorityMapColor = {
+  "low": "blue",
+  "Medium": "yellow",
+  "high": "red"
 }
 const priorityMap = {
   "low": "❗  ",
   "Medium": "❗❗ ",
-  "high": "❗❗❗",
+  "high": "❗❗❗"
 }
 
-const collectTodoInfo = async ()=>{
+const collectTodoInfo = async () => {
   return inquirer.prompt([{
     type: "input",
     name: "title",
-    message: "To do title ?",
+    message: "To do title ?"
   }, {
     type: "input",
     name: "description",
-    message: "To do description ?",
+    message: "To do description ?"
   }, {
     type: "list", name: "priority", message: "To do priority ?", choices: [
       {name: "low    ❗".blue, value: "low"},
@@ -31,7 +31,6 @@ const collectTodoInfo = async ()=>{
     type: "confirm", name: "done", message: "To do done ?"
   }])
 }
-
 
 const add = async (title) => {
   const todoInfo = title ? {title, done: false} : await collectTodoInfo()
@@ -46,7 +45,7 @@ const add = async (title) => {
 }
 
 module.exports = {
-  priorityMapWithColor,
   priorityMap,
-  add
+  add,
+  priorityMapColor
 }
