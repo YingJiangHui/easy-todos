@@ -9,7 +9,7 @@ program
   .command('add')
   .description('add a task')
   .action((...args)=>{
-    const task = args[1].join(' ')
+    const task = args[1]?.join(' ')
     api.add(task)
   })
 
@@ -23,13 +23,13 @@ program
 program
   .command('clear')
   .description('clear all tasks')
-  .action((...args)=>{
+  .action(()=>{
     api.clear()
   })
 program
   .command('show')
   .description('show all task')
-  .action((...args)=>{
+  .action(()=>{
     api.show()
   })
 
