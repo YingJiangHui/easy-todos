@@ -2,9 +2,9 @@ const db = require("./../../db.js")
 const inquirer = require("inquirer")
 const colors = require("colors")
 const priorityMapColor = {
-  "low": "blue",
-  "medium": "yellow",
-  "high": "red"
+  "low": "cyan",
+  "medium": "blue",
+  "high": "magenta"
 }
 const priorityMap = {
   "low": "❗  ",
@@ -23,9 +23,9 @@ const collectTodoInfo = async () => {
     message: "To do description ?"
   }, {
     type: "list", name: "priority", message: "To do priority ?", choices: [
-      {name: "Low    ❗".blue, value: "low"},
-      {name: "Medium ❗❗".yellow, value: "medium"},
-      {name: "High   ❗❗❗ ".red, value: "high"}
+      {name: "Low    ❗"[priorityMapColor["low"]], value: "low"},
+      {name: "Medium ❗❗"[priorityMapColor["medium"]], value: "medium"},
+      {name: "High   ❗❗❗ "[priorityMapColor["high"]], value: "high"}
     ]
   }, {
     type: "confirm", name: "done", message: "To do done ?"
