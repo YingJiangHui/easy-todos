@@ -3,7 +3,8 @@ const api = require('./index.js')
 const v = require('./package').version
 program
   .version(v)
-  .option('-x, --xxx', 'xxxxxxx')
+  .option('-d, --done','done')
+  .option('-u, --undone','undone')
 
 program
   .command('add')
@@ -29,8 +30,7 @@ program
 program
   .command('show')
   .description('show all task')
-  .action(()=>{
-    api.show()
+  .action((...args)=>{
+    api.show(program.opts())
   })
-
 program.parse(process.argv);

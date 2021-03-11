@@ -78,12 +78,14 @@ function askForAction(list, index) {
   })
 }
 
-const show = async () => {
-  const list = await db.read()
+const show = async (opts) => {
+  const data = await db.read()
+  //通过选项过滤展示的Todo
+  const list = (opts.done&&opts.undone)||(!opts.done&&!opts.undone)? data:opts.done?data.filter(item=>item.done):data.filter(item=>!item.done)
   function print({item,index}){
     const info = `${index + 1}.${item.title}`
-    const arrow = " ---------------------------> "
-    return item.done?`${priorityMap[item.priority]} ${info  + arrow}[ ✔ ]`.gray:`${priorityMap[item.priority][priorityMapColor[item.priority]]} ${info + arrow}[ ✘ ]`
+    const line = " --------------------------- "
+    return item.done?`${priorityMap[item.priority]} ${info  + line}[ ✔ ]`.gray:`${priorityMap[item.priority][priorityMapColor[item.priority]]} ${info + line}[ ✘ ]`
   }
   inquirer
     .prompt([
