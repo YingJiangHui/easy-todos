@@ -53,9 +53,12 @@ const actionMap = {
 function askForAction(list, index) {
   const todo = list[index]
   const color = priorityMapColor[todo.priority]
-  const gapLine = "---------------------------------------------------------------------------------->"[color]
+  const gapLine = "----------------------------------------------------------------------------------"[color]
   console.log(gapLine)
-  console.log(`Title: ${todo.title}    ${todo.done?"(: ✔ ←".blue:"(: ✘ ←".blue} ${priorityMap[todo.priority][color]} \nDescription: ${todo.description}`)
+  console.log(`
+  Title -------------> ${todo.title} ${priorityMap[todo.priority][color]} \n
+  Done --------------> ${todo.done?"✔":"✘"} \n
+  Description -------> ${todo.description}`)
   console.log(gapLine)
   inquirer
     .prompt([

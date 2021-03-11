@@ -3,12 +3,12 @@ const inquirer = require("inquirer")
 const colors = require("colors")
 const priorityMapColor = {
   "low": "blue",
-  "Medium": "yellow",
+  "medium": "yellow",
   "high": "red"
 }
 const priorityMap = {
   "low": "❗  ",
-  "Medium": "❗❗ ",
+  "medium": "❗❗ ",
   "high": "❗❗❗"
 }
 
@@ -23,9 +23,9 @@ const collectTodoInfo = async () => {
     message: "To do description ?"
   }, {
     type: "list", name: "priority", message: "To do priority ?", choices: [
-      {name: "low    ❗".blue, value: "low"},
-      {name: "Medium ❗❗".yellow, value: "Medium"},
-      {name: "high   ❗❗❗ ".red, value: "high"}
+      {name: "Low    ❗".blue, value: "low"},
+      {name: "Medium ❗❗".yellow, value: "medium"},
+      {name: "High   ❗❗❗ ".red, value: "high"}
     ]
   }, {
     type: "confirm", name: "done", message: "To do done ?"
@@ -33,7 +33,7 @@ const collectTodoInfo = async () => {
 }
 
 const add = async (title) => {
-  const todoInfo = title ? {title, done: false} : await collectTodoInfo()
+  const todoInfo = title ? {title, done: false,description: '',priority: 'medium'} : await collectTodoInfo()
   if (!todoInfo)
     return
   //读取文件
