@@ -67,11 +67,9 @@ function askForAction(list, index) {
         name: 'action',
         message: 'Select action',
         choices: [
-          {name: 'Quit', value: 'quit'},
-          {name: 'Done', value: 'markAsDone'},
-          {name: 'Undo', value: 'markAsUndone'},
-          {name: 'Edit', value: 'updateTitle'},
-          {name: 'Del'.red, value: 'remove'}
+          {name: todo.done?'Mark incomplete':'Mark complete', value: todo.done?'markAsUndone':'markAsDone'},
+          {name: 'Edit to do ?', value: 'updateTitle'},
+          {name: 'Delete to do ?', value: 'remove'}
         ],
       },
     ]).then((answer2) => {
@@ -93,13 +91,13 @@ const show = async () => {
         type: 'list',
         name: 'index',
         message: '请选择你想要的操作',
-        choices: [{name: 'Quit'.blue, value: '-1'}, ...list.map((item, index) => {
+        choices: [ ...list.map((item, index) => {
           console.log(item.priority)
           return {
             name: print({item,index}),
             value: index.toString()
           }
-        }), {name: 'Add'.green, value: '-2'}],
+        }),{name: '✚   Add'.green, value: '-2'}],
       },
     ])
     .then((answer) => {
