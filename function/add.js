@@ -1,6 +1,6 @@
-const db = require("./../../db.js")
+const db = require("../db.js")
 const inquirer = require("inquirer")
-const colors = require("colors")
+require("colors")
 const priorityMapColor = {
   "low": "cyan",
   "medium": "blue",

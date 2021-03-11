@@ -1,5 +1,5 @@
 const inquirer = require('inquirer')
-const db = require('./../../db')
+const db = require('../db')
 
 
 
@@ -33,7 +33,7 @@ const remove = async (searchText) => {
         {
           type: 'confirm',
           name: 'choices',
-          message: (a) => {
+          message: () => {
             return "confirm delete to do --> " + searchList.map(item => item.title).join(' | ')
           },
         },

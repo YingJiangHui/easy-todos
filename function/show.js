@@ -1,18 +1,7 @@
 const inquirer = require('inquirer')
-const db = require("../../db");
+const db = require("../db");
 require('colors')
-const {add,priorityMap,priorityMapColor} = require('../add/add')
-function askForCreate(list, index) {
-  add()
-  // inquirer.prompt({
-  //   type: 'input',
-  //   name: 'title',
-  //   message: '输入创建的标题名',
-  // }).then((answers) => {
-  //   list.push({title: answers.title, done: false})
-  //   db.write(list)
-  // })
-}
+const {add,priorityMap,priorityMapColor} = require('./add')
 
 function markAsDone(list, index) {
   list[index].done = true
@@ -107,7 +96,7 @@ const show = async (opts) => {
       if (index >= 0) {
         askForAction(list, index)
       } else if (index === -2) {
-        askForCreate(list, index)
+        add()
       }
     })
 }

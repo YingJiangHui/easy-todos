@@ -1,4 +1,4 @@
-const {removeList,searchRemove} = require('../remove')
+const {removeList,searchRemove} = require('../function/remove')
 const list = [{title:'first'},{title:'second'},{title:'third'}]
 const indexList= ['0','2','5']
 describe('删除 todo 功能',()=>{

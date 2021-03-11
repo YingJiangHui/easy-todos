@@ -1,13 +1,14 @@
 {
-  "name": "todolist-c-1",
+  "name": "easy-todo",
   "script": "jest",
   "bin": {
     "t": "cli.js"
   },
   "files": [
-    "*.js"
+    "*.js",
+    "/function/*.js"
   ],
-  "version": "0.0.4",
+  "version": "0.1.0",
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
