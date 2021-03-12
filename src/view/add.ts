@@ -1,7 +1,7 @@
-const db = require("../db.js")
+const db = require("../../db.js")
 const inquirer = require("inquirer")
 const colors = require("colors")
-const {priorityColorMap} = require("../src/constant/priorityColor.ts")
+const {priorityColorMap} = require("../constant/priorityColor.ts")
 
 const collectTodoInfo = async () => {
   return inquirer.prompt([{
@@ -23,7 +23,7 @@ const collectTodoInfo = async () => {
   }])
 }
 
-const add = async (title) => {
+const add = async (title?: string) => {
   const todoInfo = title ? {title, done: false,description: '',priority: 'medium'} : await collectTodoInfo()
   if (!todoInfo)
     return
@@ -35,6 +35,4 @@ const add = async (title) => {
   await db.write(list)
 }
 
-module.exports = {
-  add,
-}
+export default add

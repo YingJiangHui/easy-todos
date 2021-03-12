@@ -25,4 +25,4 @@ const showTodoList = async (todoList:Todo[]) => {
     },
   ])
 }
-module.exports = showTodoList
+export default showTodoList

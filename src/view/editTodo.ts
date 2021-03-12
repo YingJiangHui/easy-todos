@@ -12,4 +12,4 @@ async function editTodo () {
   }])
 }
 
-module.exports = editTodo
+export default editTodo

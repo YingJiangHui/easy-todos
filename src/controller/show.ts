@@ -1,11 +1,11 @@
 import {Todo} from '../custom';
-const showTodoList = require('../view/showTodoList.ts');
-const editTodo = require('../view/editTodo.ts');
-// const askForAction = require('../view/askForAction.ts')
+import showTodoList from '../view/showTodoList';
+import editTodo from '../view/editTodo';
 import askForAction from '../view/askForAction'
+import add from '../view/add'
+
 const db = require("../../db.js");
 require('colors')
-const {add} = require('../../function/add.js')
 
 function markAsDone(list:Todo[], index:number) {
   list[index].done = true
