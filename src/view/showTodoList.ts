@@ -1,11 +1,14 @@
+import {Todo} from '../custom';
+
+export {}
 const inquirer = require('inquirer')
 const colors = require('colors')
-const {priorityMap,priorityMapColor} = require('./add')
+const {priorityColorMap,priorityTextMap} = require('../constant/priorityColor')
 
-function print(todo:Todo){
-  const info = `${todo.id}.${todo.title}`
+function print(todo:Todo,index:number){
+  const info = `${index+1}.${todo.title}`
   const line = " --------------------------- "
-  return todo.done?colors.gray(`${priorityMap[todo.priority]} ${info  + line}[ ✔ ]`):`${priorityMap[todo.priority][priorityMapColor[todo.priority]]} ${info + line}[ ✘ ]`
+  return todo.done?colors.gray(`${priorityTextMap[todo.priority]} ${info  + line}[ ✔ ]`):`${priorityTextMap[todo.priority][priorityColorMap[todo.priority]]} ${info + line}[ ✘ ]`
 }
 
 const showTodoList = async (todoList:Todo[]) => {
@@ -17,12 +20,11 @@ const showTodoList = async (todoList:Todo[]) => {
       message: 'Select action',
       choices: [ ...todoList.map((todo, index) => {
         return {
-          name: print(todo),
+          name: print(todo,index),
           value: index.toString()
         }
       }),{name: colors.green('✚   Add'), value: '-2'}],
     },
   ])
 }
-
-export default showTodoList
+module.exports = showTodoList

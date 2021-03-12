@@ -1,5 +1,5 @@
 const program = require('commander');
-const api = require('./index.js')
+const api = require('./index.ts')
 const v = require('./package').version
 program
   .version(v)
@@ -9,7 +9,7 @@ program
 program
   .command('add')
   .description('add a task')
-  .action((...args)=>{
+  .action((...args:any[])=>{
     const task = args[1]?.join(' ')
     api.add(task)
   })
@@ -17,7 +17,7 @@ program
 program
   .command('remove')
   .description('choose will remove todo')
-  .action((...args)=>{
+  .action((...args:any[])=>{
     // 匹配index text进行删除
     api.remove(args[1]?args[1][0]:'')
   })
@@ -30,7 +30,7 @@ program
 program
   .command('show')
   .description('show all task')
-  .action((...args)=>{
+  .action(()=>{
     api.show(program.opts())
   })
 program.parse(process.argv);

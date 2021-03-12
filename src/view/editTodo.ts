@@ -1,7 +1,9 @@
+export {}
+
 const inquirer = require("inquirer")
 
 async function editTodo () {
-  return await inquirer.prompt([{
+  return inquirer.prompt([{
     type: "input",
     name: "title",
     message: "To do title ?",
@@ -12,4 +14,4 @@ async function editTodo () {
   }])
 }
 
-export default editTodo
+module.exports = editTodo

@@ -1,8 +1,12 @@
-import {priorityColorMap,priorityTextMap} from '../constant/priorityColor';
-const colors = require('colors')
-const inquirer = require('inquirer')
+import {Todo} from '../custom';
 
-function askForAction(todo:Todo) {
+const {priorityColorMap,priorityTextMap} = require('../constant/priorityColor');
+const colors = require('colors')
+const inquirer  = require('inquirer')
+
+type actions =  "markAsUndone"|"markAsDone"|"edit"|"remove"
+
+async function askForAction(todo:Todo):Promise<{action:actions}> {
   const color = priorityColorMap[todo.priority]
   const title = `${colors[color](todo.title)} ${colors[color](priorityTextMap[todo.priority])} ${todo.done?colors.yellow("Done"):colors.yellow("Undone")}`
   const gapLine = colors[color]("----------------------------------------------------------------------------------")
@@ -18,11 +22,11 @@ function askForAction(todo:Todo) {
       message: 'Select action',
       choices: [
         {name: todo.done?'Mark incomplete':'Mark complete', value: todo.done?'markAsUndone':'markAsDone'},
-        {name: 'Edit to do ?', value: 'updateTitle'},
+        {name: 'Edit to do ?', value: 'edit'},
         {name: 'Delete to do ?', value: 'remove'}
       ],
     },
   ])
 }
 
-module.exports = askForAction
+export default askForAction

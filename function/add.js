@@ -1,16 +1,7 @@
 const db = require("../db.js")
 const inquirer = require("inquirer")
-require("colors")
-const priorityMapColor = {
-  "low": "cyan",
-  "medium": "blue",
-  "high": "magenta"
-}
-const priorityMap = {
-  "low": "❗  ",
-  "medium": "❗❗ ",
-  "high": "❗❗❗"
-}
+const colors = require("colors")
+const {priorityColorMap} = require("../src/constant/priorityColor.ts")
 
 const collectTodoInfo = async () => {
   return inquirer.prompt([{
@@ -23,9 +14,9 @@ const collectTodoInfo = async () => {
     message: "To do description ?"
   }, {
     type: "list", name: "priority", message: "To do priority ?", choices: [
-      {name: "Low    ❗"[priorityMapColor["low"]], value: "low"},
-      {name: "Medium ❗❗"[priorityMapColor["medium"]], value: "medium"},
-      {name: "High   ❗❗❗ "[priorityMapColor["high"]], value: "high"}
+      {name: colors[priorityColorMap["low"]]("Low    ❗"), value: "low"},
+      {name: colors[priorityColorMap["medium"]]("Medium ❗❗"), value: "medium"},
+      {name: colors[priorityColorMap["high"]]("High   ❗❗❗ "), value: "high"}
     ]
   }, {
     type: "confirm", name: "done", message: "To do done ?"
@@ -45,7 +36,5 @@ const add = async (title) => {
 }
 
 module.exports = {
-  priorityMap,
   add,
-  priorityMapColor
 }

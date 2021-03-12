@@ -1,5 +1,5 @@
 const inquirer = require('inquirer')
-const db = require("../db");
+const db = require("../db.js");
 require('colors')
 const {add,priorityMap,priorityMapColor} = require('./add')
 
