@@ -1,5 +1,3 @@
-export {}
-
 const inquirer = require("inquirer")
 
 async function editTodo () {

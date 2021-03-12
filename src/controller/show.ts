@@ -1,4 +1,3 @@
-export {}
 import {Todo} from '../custom';
 const showTodoList = require('../view/showTodoList.ts');
 const editTodo = require('../view/editTodo.ts');

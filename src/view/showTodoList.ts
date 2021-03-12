@@ -1,6 +1,4 @@
 import {Todo} from '../custom';
-
-export {}
 const inquirer = require('inquirer')
 const colors = require('colors')
 const {priorityColorMap,priorityTextMap} = require('../constant/priorityColor')
