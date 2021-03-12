@@ -2,14 +2,14 @@
   "name": "easy-todo-12",
   "script": "jest",
   "bin": {
-    "t": "cli.js"
+    "t": "cli.ts"
   },
   "files": [
     "*.js",
     "/function/*.js"
   ],
   "version": "0.1.0",
-  "main": "index.js",
+  "main": "index.ts",
   "license": "MIT",
   "dependencies": {
     "colors": "^1.4.0",
@@ -20,6 +20,7 @@
     "node-emoji": "^1.10.0"
   },
   "devDependencies": {
+    "@types/commander": "^2.12.2",
     "@types/inquirer": "^7.3.1",
     "@types/node": "^14.14.33",
     "@types/node-emoji": "^1.8.1",
