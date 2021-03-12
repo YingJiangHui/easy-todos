@@ -1,8 +1,6 @@
 const inquirer = require('inquirer')
 const db = require('../db')
 
-
-
 function searchRemove(list, searchText) {
   const searchList = list.filter((item) => item.title.trim() === searchText.trim())
   const newList = list.filter((item) => item.title.trim() !== searchText.trim())
