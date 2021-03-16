@@ -11,7 +11,7 @@ const write = (list:Todo[],path=dbPath) =>
   )
 
 
-const read = (path=dbPath) => {
+const read = (path=dbPath):Promise<Todo[]> => {
   return new Promise((resolve, reject) => {
     fs.readFile(path, {flag: 'a+'}, (error:ErrnoException, data:Buffer) => {
       let list
