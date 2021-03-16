@@ -4,7 +4,7 @@ import editTodo from '../view/editTodo';
 import askForAction from '../view/askForAction'
 import add from '../view/add'
 
-const db = require("../../db.js");
+const db = require("../db.js");
 require('colors')
 
 function markAsDone(list:Todo[], index:number) {

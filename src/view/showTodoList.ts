@@ -21,7 +21,7 @@ const showTodoList = async (todoList:Todo[]) => {
           name: print(todo,index),
           value: index.toString()
         }
-      }),{name: colors.green('✚   Add'), value: '-2'}],
+      }),{name: colors.green('✚   Todo'), value: '-2'}],
     },
   ])
 }

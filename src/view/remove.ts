@@ -1,7 +1,7 @@
 import inquirer from 'inquirer';
 import {Todo} from '../custom';
 
-async function confirmRemove (todoList:Todo[]){
+async function confirmRemoveTodo (todoList:Todo[]){
   inquirer
   .prompt([
     {
@@ -13,5 +13,21 @@ async function confirmRemove (todoList:Todo[]){
     },
   ])
 }
+async function chooseRemoveTodos (todoList:Todo[]){
+  return inquirer
+  .prompt([
+    {
+      type: 'checkbox',
+      name: 'select',
+      message: 'remove todo/todos ？',
+      choices: [...todoList.map((item, index) => {
+        return {
+          name: `${index+1}. ${item.title}`,
+          value: index.toString()
+        }
+      })],
+    },
+  ])
+}
 
-export default {confirmRemove}
+export default {confirmRemoveTodo,chooseRemoveTodos}

@@ -1,21 +1,24 @@
+import {Todo} from './custom';
+import ErrnoException = NodeJS.ErrnoException;
+
 const USER_HOME = process.env.HOME || process.env.USERPROFILE
 const path = require('path')
 const dbPath = path.join(USER_HOME, '.todo')
 const fs = require('fs')
-const write = (list,path=dbPath) =>
+const write = (list:Todo[],path=dbPath) =>
   new Promise((resolve, reject) =>
-    fs.writeFile(path, JSON.stringify(list), (error) => error ? reject(error) : resolve())
+    fs.writeFile(path, JSON.stringify(list), (error:ErrnoException) => error ? reject(error) : resolve(null))
   )
 
 
 const read = (path=dbPath) => {
   return new Promise((resolve, reject) => {
-    fs.readFile(path, {flag: 'a+'}, (error1, data) => {
+    fs.readFile(path, {flag: 'a+'}, (error:ErrnoException, data:Buffer) => {
       let list
-      if (error1)
-        return reject(error1)
+      if (error)
+        return reject(error)
       try {
-        list = JSON.parse(data)
+        list = JSON.parse(data.toString())
       } catch (error2) {
         list = []
       }
@@ -29,4 +32,4 @@ const db = {
   read
 }
 
-module.exports = db
+export default db

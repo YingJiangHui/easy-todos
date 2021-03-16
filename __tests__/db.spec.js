@@ -1,4 +1,4 @@
-const db = require('../db.js')
+const db = require('../src/db.ts')
 const fs = require('fs')
 jest.mock('fs')
 

@@ -1,5 +1,5 @@
 const inquirer = require('inquirer')
-const db = require('../db')
+const db = require('../src/db')
 
 function searchRemove(list, searchText) {
   const searchList = list.filter((item) => item.title.trim() === searchText.trim())
