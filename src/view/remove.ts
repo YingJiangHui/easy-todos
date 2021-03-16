@@ -1,8 +1,8 @@
-import inquirer from 'inquirer';
+const inquirer = require('inquirer')
 import {Todo} from '../custom';
 
 async function confirmRemoveTodo (todoList:Todo[]){
-  inquirer
+  return inquirer
   .prompt([
     {
       type: 'confirm',
@@ -30,4 +30,4 @@ async function chooseRemoveTodos (todoList:Todo[]){
   ])
 }
 
-export default {confirmRemoveTodo,chooseRemoveTodos}
+export {confirmRemoveTodo,chooseRemoveTodos}
