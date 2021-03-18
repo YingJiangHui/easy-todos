@@ -3,9 +3,6 @@
   "bin": {
     "te": "lib/index.js"
   },
-  "files": [
-    "lib/*"
-  ],
   "scripts": {
     "publish:npm": "npm publish"
   },
