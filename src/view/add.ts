@@ -1,6 +1,6 @@
 const inquirer = require("inquirer")
 const colors = require("colors")
-const {priorityColorMap} = require("../constant/priorityColor.ts")
+const {priorityColorMap} = require("../constant/priorityColor")
 
 const collectTodoInfo = async () => {
   return inquirer.prompt([{

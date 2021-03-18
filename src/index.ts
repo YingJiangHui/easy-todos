@@ -1,8 +1,10 @@
+import TaskController from './controller/Task';
+
 const program = require('commander');
 const v = require('../package').version
-import Task from './controller/Task'
-const {add,remove,clear,show} = new Task()
+const taskController = new TaskController()
 
+const {add,remove,clear,show} = taskController
 program
 .version(v)
 .option('-d, --done','done')

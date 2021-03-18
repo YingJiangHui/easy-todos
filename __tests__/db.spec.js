@@ -1,4 +1,4 @@
-const db = require('../src/model/database.ts')
+const db = require('../src/model/database')
 const fs = require('fs')
 jest.mock('fs')
 

@@ -57,11 +57,11 @@ class TaskController {
     await database.write(todos);
   }
   
-  async clear() {
+  clear=async ()=> {
     await database.write([]);
   }
   
-  async show(opts: Options) {
+  show=async (opts: Options) =>{
     const data: Todo[] = await database.read();
     //通过选项过滤展示的Todo
     const todoList = (opts.done && opts.undone) || (!opts.done && !opts.undone) ? data : opts.done ? data.filter(item => item.done) : data.filter(item => !item.done);
@@ -74,13 +74,13 @@ class TaskController {
     }
   }
   
-  async choiceAction(todoList: Todo[],index: number) {
+  choiceAction=async(todoList: Todo[],index: number)=> {
     const answer = await askForAction(todoList[index]);
     const action = actionMap[answer.action];
     action?.(todoList,index);
   }
   
-  async add(title?: string) {
+  add = async(title?: string)=> {
     const todoInfo = title ? {title,done: false,description: '',priority: 'medium'} : await collectTodoInfo();
     if (!todoInfo) return;
     //读取文件
@@ -91,7 +91,7 @@ class TaskController {
     await TaskController.setTask(list);
   }
   
-  async remove(searchText:string) {
+  remove = async(searchText:string)=> {
     const todoList = await TaskController.getTasks();
     if (todoList.length === 0) {
       console.log('No things to do ~');
