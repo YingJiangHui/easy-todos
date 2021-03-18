@@ -4,28 +4,28 @@ import editTodo from '../view/editTodo';
 import askForAction from '../view/askForAction'
 import add from '../view/add'
 
-const db = require("../db.js");
+const db = require("../model/database.js");
 require('colors')
 
 function markAsDone(list:Todo[], index:number) {
   list[index].done = true
-  db.write(list)
+  database.write(list)
 }
 
 function markAsUndone(list:Todo[], index:number) {
   list[index].done = false
-  db.write(list)
+  database.write(list)
 }
 
 async function edit (list:Todo[], index:number) {
   const answer = await editTodo()
   list[index] = {...list[index],...answer}
-  await db.write(list)
+  await database.write(list)
 }
 
 async function remove(list:Todo[], index:number) {
   list.splice(index, 1)
-  await db.write(list)
+  await database.write(list)
 }
 
 const actionMap = {
@@ -48,7 +48,7 @@ type Options = {
 }
 
 const show = async (opts:Options) => {
-  const data:Todo[] = await db.read()
+  const data:Todo[] = await database.read()
   //通过选项过滤展示的Todo
   const todoList = (opts.done&&opts.undone)||(!opts.done&&!opts.undone)? data:opts.done?data.filter(item=>item.done):data.filter(item=>!item.done)
   const answer = await showTodoList(todoList)

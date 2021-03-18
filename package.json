@@ -1,15 +1,16 @@
 {
   "name": "easy-todo-12",
-  "script": "jest",
+  "script": {
+    "t": "ts-node src/index.ts"
+  },
   "bin": {
-    "t": "cli.ts"
+    "t": "lib/index.js"
   },
   "files": [
-    "*.js",
-    "/function/*.js"
+    "*.js"
   ],
   "version": "0.1.0",
-  "main": "index.ts",
+  "main": "lib/index.js",
   "license": "MIT",
   "dependencies": {
     "colors": "^1.4.0",

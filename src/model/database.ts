@@ -1,4 +1,4 @@
-import {Todo} from './custom';
+import {Todo} from '../custom';
 import ErrnoException = NodeJS.ErrnoException;
 
 const USER_HOME = process.env.HOME || process.env.USERPROFILE
@@ -26,9 +26,9 @@ const read = (path=dbPath):Promise<Todo[]> => {
   })
 
 }
-const db = {
+const database = {
   write,
   read
 }
 
-export default db
+export default database

@@ -1,4 +1,4 @@
-import db from '../db';
+import database from '../model/database';
 import {Todo} from '../custom';
 import showTodoList from '../view/showTodoList';
 import askForAction from '../view/askForAction';
@@ -45,7 +45,7 @@ const actionMap = {
 
 class TaskController {
   static async getTasks() {
-    return db.read();
+    return database.read();
   }
   
   static async getTask(index: number) {
@@ -54,15 +54,15 @@ class TaskController {
   }
   
   static async setTask(todos: Todo[]) {
-    await db.write(todos);
+    await database.write(todos);
   }
   
   async clear() {
-    await db.write([]);
+    await database.write([]);
   }
   
   async show(opts: Options) {
-    const data: Todo[] = await db.read();
+    const data: Todo[] = await database.read();
     //通过选项过滤展示的Todo
     const todoList = (opts.done && opts.undone) || (!opts.done && !opts.undone) ? data : opts.done ? data.filter(item => item.done) : data.filter(item => !item.done);
     const answer = await showTodoList(todoList);
@@ -84,7 +84,7 @@ class TaskController {
     const todoInfo = title ? {title,done: false,description: '',priority: 'medium'} : await collectTodoInfo();
     if (!todoInfo) return;
     //读取文件
-    const list = await db.read();
+    const list = await database.read();
     // //添加todo
     list.push(todoInfo);
     // //写入文件
@@ -104,7 +104,7 @@ class TaskController {
         return;
       }
       const answer = await confirmRemoveTodo(searchList);
-      answer.choices && db.write(newList);
+      answer.choices && database.write(newList);
       return;
     }
     const answer = await chooseRemoveTodos(todoList);
