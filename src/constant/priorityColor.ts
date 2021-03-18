@@ -1,7 +1,7 @@
 const priorityColorMap = {
   "low": "cyan",
   "medium": "blue",
-  "high": "magenta"
+  "high": "yellow"
 }
 
 export type PriorityColorMap = typeof priorityColorMap

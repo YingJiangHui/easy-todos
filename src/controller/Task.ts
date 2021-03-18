@@ -88,7 +88,6 @@ class TaskController {
     // //添加todo
     list.push(todoInfo);
     // //写入文件
-    console.log(list);
     await TaskController.setTask(list);
   }
   
@@ -104,11 +103,15 @@ class TaskController {
         console.log('Not find to do ~');
         return;
       }
-      const answer = await confirmRemoveTodo(todoList);
+      const answer = await confirmRemoveTodo(searchList);
       answer.choices && db.write(newList);
       return;
     }
-    await chooseRemoveTodos(todoList);
+    const answer = await chooseRemoveTodos(todoList);
+    
+    await TaskController.setTask(
+      todoList.filter((_, index) => !answer.select.includes(index.toString()))
+    )
   }
 }
 

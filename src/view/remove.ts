@@ -13,7 +13,7 @@ async function confirmRemoveTodo (todoList:Todo[]){
     },
   ])
 }
-async function chooseRemoveTodos (todoList:Todo[]){
+async function chooseRemoveTodos (todoList:Todo[]):Promise<{select:string[]}>{
   return inquirer
   .prompt([
     {

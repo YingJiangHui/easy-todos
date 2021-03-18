@@ -8,7 +8,7 @@ program
 
 program
   .command('add')
-  .description('add a task')
+  .description('add a todo')
   .action((...args:any[])=>{
     const task = args[1]?.join(' ')
     api.add(task)
@@ -23,13 +23,14 @@ program
   })
 program
   .command('clear')
-  .description('clear all tasks')
+  .description('clear all todo')
   .action(()=>{
     api.clear()
   })
+
 program
   .command('show')
-  .description('show all task')
+  .description('show all todo')
   .action(()=>{
     api.show(program.opts())
   })

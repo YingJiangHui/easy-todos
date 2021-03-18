@@ -10,7 +10,6 @@ const write = (list:Todo[],path=dbPath) =>
     fs.writeFile(path, JSON.stringify(list), (error:ErrnoException) => error ? reject(error) : resolve(null))
   )
 
-
 const read = (path=dbPath):Promise<Todo[]> => {
   return new Promise((resolve, reject) => {
     fs.readFile(path, {flag: 'a+'}, (error:ErrnoException, data:Buffer) => {
