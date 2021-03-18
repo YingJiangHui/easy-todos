@@ -4,5 +4,6 @@ tsconfig.json
 yarn.lock
 .gitignore
 .npmignore
-__test__
+__tests__
 __mocks__
+.idea
