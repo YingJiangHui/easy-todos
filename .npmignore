@@ -1,9 +1,0 @@
-src
-node_modules
-tsconfig.json
-yarn.lock
-.gitignore
-.npmignore
-__tests__
-__mocks__
-.idea
