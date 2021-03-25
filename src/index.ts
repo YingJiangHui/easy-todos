@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import TaskController from './controller/Task';
 
 const program = require('commander');
