@@ -7,7 +7,8 @@
     "lib/*"
   ],
   "scripts": {
-    "publish:npm": "npm publish"
+    "publish:npm": "npm publish",
+    "test": "jest"
   },
   "version": "0.1.3",
   "main": "lib/index.js",

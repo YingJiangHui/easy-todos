@@ -24,7 +24,7 @@ class TaskController {
     await database.write(todos);
   }
   
-  searchRemove(list: Todo[],searchText: string) {
+  searchRemoveTask(list: Todo[],searchText: string) {
     const searchList = list.filter((item) => item.title.trim() === searchText.trim());
     const newList = list.filter((item) => item.title.trim() !== searchText.trim());
     return {
@@ -58,8 +58,6 @@ class TaskController {
       markAsDone,markAsUndone,edit,remove
     };
   }
-  
-  
 
   choiceAction = async(todoList: Todo[],index: number) => {
     const answer = await askForActionToTask(todoList[index]);
@@ -95,16 +93,14 @@ class TaskController {
   
   removeTask = async(searchText: string) => {
     const todoList = await TaskController.getTasks();
-    if (todoList.length === 0) {
-      console.log('No things to do ~');
-      return;
-    }
+    if (todoList.length === 0)
+      return console.log('No things to do ~')
+    
     if (searchText) {
-      const {searchList,newList} = this.searchRemove(todoList,searchText);
-      if (searchList.length === 0) {
-        console.log('Not find to do ~');
-        return;
-      }
+      const {searchList,newList} = this.searchRemoveTask(todoList,searchText);
+      if (searchList.length === 0)
+        return console.log('Not find to do ~');
+      
       const answer = await confirmRemoveTodo(searchList);
       answer.choices && await database.write(newList);
       return;
