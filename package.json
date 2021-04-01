@@ -1,16 +1,17 @@
 {
-  "name": "easy-todo-12",
+  "name": "easy-todos",
   "bin": {
-    "te": "lib/index.js"
+    "ets": "lib/index.js"
   },
   "files": [
     "lib/*"
   ],
   "scripts": {
+    "tsc": "tsc",
     "publish:npm": "npm publish",
     "test": "jest"
   },
-  "version": "0.1.3",
+  "version": "0.9.9",
   "main": "lib/index.js",
   "license": "MIT",
   "dependencies": {
