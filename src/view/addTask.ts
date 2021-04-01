@@ -1,8 +1,9 @@
 const inquirer = require("inquirer")
 const colors = require("colors")
-const {priorityColorMap} = require("../constant/priorityColor")
+import {priorityColorMap,priorityTextMap,PriorityKey}  from "../constant/priorityColor"
 
 const collectTodoInfo = async () => {
+  const taskPriorityList = (Object.keys(priorityColorMap) as PriorityKey[]).map((key)=>({name:colors[priorityColorMap[key]](priorityTextMap[key]+" "+key),value:key}))
   return inquirer.prompt([{
     type: "input",
     name: "title",
@@ -12,11 +13,7 @@ const collectTodoInfo = async () => {
     name: "description",
     message: "To do description ?"
   }, {
-    type: "list", name: "priority", message: "To do priority ?", choices: [
-      {name: colors[priorityColorMap["low"]]("Low    ❗"), value: "low"},
-      {name: colors[priorityColorMap["medium"]]("Medium ❗❗"), value: "medium"},
-      {name: colors[priorityColorMap["high"]]("High   ❗❗❗ "), value: "high"}
-    ]
+    type: "list", name: "priority", message: "To do priority ?", choices: taskPriorityList
   }, {
     type: "confirm", name: "done", message: "To do done ?"
   }])

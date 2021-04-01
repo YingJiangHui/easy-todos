@@ -6,7 +6,7 @@ const program = require('commander');
 const v = require('../package').version
 const taskController = new TaskController()
 
-const {add,remove,clear,show} = taskController
+const {addTask,removeTask,clearTask,showTask} = taskController
 program
 .version(v)
 .option('-d, --done','done')
@@ -17,7 +17,7 @@ program
 .description('add a todo')
 .action(async (...args:any[])=>{
   const task = args[1]?.join(' ')
-  await add(task)
+  await addTask(task)
 })
 
 program
@@ -25,20 +25,20 @@ program
 .description('choose will remove todo')
 .action(async(...args:any[])=>{
   // 匹配index text进行删除
-  await remove(args[1]?args[1][0]:'')
+  await removeTask(args[1]?args[1][0]:'')
 })
 program
 .command('clear')
 .description('clear all todo')
 .action(async ()=>{
-  await clear()
+  await clearTask()
 })
 
 program
 .command('show')
 .description('show all todo')
 .action(async ()=>{
-  await show(program.opts())
+  await showTask(program.opts())
 })
 
 program.parse(process.argv);

@@ -1,12 +1,11 @@
 import {Todo} from '../custom';
-
-const {priorityColorMap,priorityTextMap} = require('../constant/priorityColor');
+import {priorityColorMap,priorityTextMap} from '../constant/priorityColor'
 const colors = require('colors')
 const inquirer  = require('inquirer')
 
 type actions =  "markAsUndone"|"markAsDone"|"edit"|"remove"
 
-async function askForAction(todo:Todo):Promise<{action:actions}> {
+async function askForActionToTask(todo:Todo):Promise<{action:actions}> {
   const color = priorityColorMap[todo.priority]
   const title = `${colors[color](todo.title)} ${colors[color](priorityTextMap[todo.priority])} ${todo.done?colors.yellow("Done"):colors.yellow("Undone")}`
   const gapLine = colors[color]("----------------------------------------------------------------------------------")
@@ -29,4 +28,4 @@ async function askForAction(todo:Todo):Promise<{action:actions}> {
   ])
 }
 
-export default askForAction
+export default askForActionToTask

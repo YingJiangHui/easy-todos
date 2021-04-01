@@ -1,6 +1,6 @@
 const inquirer = require("inquirer")
 
-async function editTodo () {
+async function editTask () {
   return inquirer.prompt([{
     type: "input",
     name: "title",
@@ -12,4 +12,4 @@ async function editTodo () {
   }])
 }
 
-export default editTodo
+export default editTask

@@ -1,20 +1,17 @@
-const priorityColorMap = {
-  "low": "cyan",
+export const priorityColorMap = {
+  "low": "green",
   "medium": "blue",
-  "high": "yellow"
+  "high": "yellow",
+  "highest": "red"
+}
+
+export const priorityTextMap = {
+  "low": "❗   ",
+  "medium": "❗❗  ",
+  "high": "❗❗❗ ",
+  "highest": "❗❗❗❗"
 }
 
 export type PriorityColorMap = typeof priorityColorMap
-
-const priorityTextMap = {
-  "low": "❗  ",
-  "medium": "❗❗ ",
-  "high": "❗❗❗"
-}
-
 export type PriorityTextMap = typeof priorityTextMap
-
-module.exports ={
-  priorityColorMap,
-  priorityTextMap
-}
+export type PriorityKey = keyof typeof priorityTextMap

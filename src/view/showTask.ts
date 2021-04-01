@@ -1,15 +1,16 @@
 import {Todo} from '../custom';
+import {priorityColorMap,priorityTextMap} from '../constant/priorityColor'
+
 const inquirer = require('inquirer')
 const colors = require('colors')
-const {priorityColorMap,priorityTextMap} = require('../constant/priorityColor')
 
 function print(todo:Todo,index:number){
   const info = `${index+1}.${todo.title}`
   const line = " --------------------------- "
-  return todo.done?colors.gray(`${priorityTextMap[todo.priority]} ${info  + line}[ ✔ ]`):`${priorityTextMap[todo.priority][priorityColorMap[todo.priority]]} ${info + line}[ ✘ ]`
+  return todo.done?colors.gray(`${priorityTextMap[todo.priority]} ${info  + line}[ ✔ ]`):`${colors[priorityColorMap[todo.priority]](priorityTextMap[todo.priority])} ${info + line}[ ✘ ]`
 }
 
-const showTodoList = async (todoList:Todo[]) => {
+const showTask = async (todoList:Todo[]) => {
   return inquirer
   .prompt([
     {
@@ -25,4 +26,4 @@ const showTodoList = async (todoList:Todo[]) => {
     },
   ])
 }
-export default showTodoList
+export default showTask
