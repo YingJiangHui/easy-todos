@@ -9,9 +9,8 @@ const taskController = new TaskController()
 const {addTask,removeTask,clearTask,showTask} = taskController
 program
 .version(v)
-.option('-d, --done','done')
-.option('-u, --undone','undone')
-
+  .option('-d, --done','Filter out done todos')
+  .option('-u, --undone','Filter out undone todos')
 program
 .command('add')
 .description('add a todo')
@@ -22,21 +21,23 @@ program
 
 program
 .command('remove')
-.description('choose will remove todo')
+.description('choose will remove todo(s)')
 .action(async(...args:any[])=>{
   // 匹配index text进行删除
   await removeTask(args[1]?args[1][0]:'')
 })
 program
 .command('clear')
-.description('clear all todo')
+.description('clear all todos')
 .action(async ()=>{
   await clearTask()
 })
 
 program
 .command('show')
-.description('show all todo')
+  .option('-d, --done','Filter out done todos')
+  .option('-u, --undone','Filter out undone todos')
+.description('show all todos')
 .action(async ()=>{
   await showTask(program.opts())
 })

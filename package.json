@@ -1,18 +1,24 @@
 {
+  "version": "0.9.91",
   "name": "easy-todos",
   "bin": {
-    "ets": "lib/index.js"
+    "ets": "lib/index.js",
+    "easy-todos": "lib/index.js"
   },
-  "files": [
-    "lib/*"
-  ],
+  "homepage": "https://github.com/YingJiangHui/easy-todos",
+  "repository": "https://github.com/YingJiangHui/easy-todos",
+  "description": "命令行 todo list",
+  "keywords": ["todo list","easy"],
   "scripts": {
+    "start": "ts-node src/index.ts",
     "tsc": "tsc",
     "publish:npm": "npm publish",
     "test": "jest"
   },
-  "version": "0.9.9",
   "main": "lib/index.js",
+  "files": [
+    "lib/*"
+  ],
   "license": "MIT",
   "dependencies": {
     "colors": "^1.4.0",

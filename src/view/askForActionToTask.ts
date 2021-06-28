@@ -20,7 +20,7 @@ async function askForActionToTask(todo:Todo):Promise<{action:actions}> {
       name: 'action',
       message: 'Select action',
       choices: [
-        {name: todo.done?'Mark incomplete':'Mark complete', value: todo.done?'markAsUndone':'markAsDone'},
+        {name: todo.done?'Mark undone':'Mark done', value: todo.done?'markAsUndone':'markAsDone'},
         {name: 'Edit to do ?', value: 'edit'},
         {name: 'Delete to do ?', value: 'remove'}
       ],
